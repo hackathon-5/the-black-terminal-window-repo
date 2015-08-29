@@ -39,8 +39,10 @@ def login():
 def new_teacher():
     if not request.json.get('username') or not request.json.get('password'):
         abort(400)
-    if Teacher.query.filter_by(username=request.json.get('username')):
-        abort(400)
+
+    # if Teacher.query.filter_by(username=request.json.get('username')):
+    #     abort(400)
+
     teacher = Teacher(username=request.json.get('username'), password=request.json.get('password'))
     db.session.add(teacher)
     db.session.commit()
