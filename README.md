@@ -10,7 +10,7 @@
 
 [sqlalchemy](http://www.sqlalchemy.org/) - Sits between the Python and Database (so they don't start fighting)
 
-[BCrypt](https://flask-bcrypt.readthedocs.org/en/latest/) - All passwords and access tokens are stored and verified using 14 round bcrypt (security consultent indicated we should use 140 rounds, but he was ignored)
+[BCrypt](https://flask-bcrypt.readthedocs.org/en/latest/) - All passwords and access tokens are stored and verified using 14 round bcrypt )
 
 [Docker](https://www.docker.com/) & [Postgres](https://hub.docker.com/_/postgres/) - Are used to deploy persistant application storage
 
@@ -38,9 +38,13 @@ All Hail [Trusty Tahr](http://releases.ubuntu.com/14.04/)! - Ubuntu doing the im
 > 
 >         location / {
 >                 try_files $uri /index.html;
+
 >         }
 > 		}
 
+---
+
+![I Have!](http://i.imgur.com/BoiychX.png)
 
 
 
