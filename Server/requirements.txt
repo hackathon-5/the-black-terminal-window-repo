@@ -1,4 +1,4 @@
 flask
-bcrypt
-flask_sqlalchemy
+flask-sqlalchemy
 arrow
+psycopg2

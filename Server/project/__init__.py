@@ -1,10 +1,9 @@
 import logging
 import sys
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
 
 
@@ -17,6 +16,11 @@ app.logger.addHandler(handler)
 app.logger.setLevel(logging.DEBUG)
 app.logger.info('Logging has been configured.')
 
+from .config import DevConfig
+app.config.from_object(DevConfig)
+
+db = SQLAlchemy(app)
+
 from .helpers.auth import generate_user, respond_to_options, add_cors_headers
 app.before_request(respond_to_options)
 app.before_request(generate_user)
@@ -28,4 +32,4 @@ from .handlers.student import student_bp
 app.register_blueprint(login_bp)
 app.register_blueprint(student_bp)
 
-#db.create_all()
+db.create_all()
