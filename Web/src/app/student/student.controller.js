@@ -11,14 +11,9 @@
 
   /** @ngInject */
   function StudentController($state, $log, $mdDialog, $firebaseArray, CheckInService) {
-    var vm = this,
-        _list = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/students'));
+    var vm = this;
 
-    vm.list = _list;
-
-    CheckInService.Student.list().then(function(data, status) {
-      $log.info(arguments);
-    });
+    refreshView();
 
     vm.openStudentDetails = function(student) {
       $log.info(student);
@@ -36,7 +31,7 @@
       })
       .then(function(viewModel) {
           CheckInService.Student.new({
-            image: 'https://unsplash.it/300',
+            image: viewModel.file[0].base64,
             first_name: viewModel.firstName,
             last_name: viewModel.lastName,
             grade: viewModel.grade,
@@ -44,11 +39,17 @@
             dob: viewModel.dob
           })
           .then(function(data, status) {
-            $log.info(arguments);
+            refreshView();
           });
 
       }, function() {
 
+      });
+    };
+
+    function refreshView() {
+      CheckInService.Student.list().then(function(data, status) {
+        vm.students = data.students;
       });
     };
   }

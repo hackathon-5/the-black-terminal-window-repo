@@ -11,28 +11,9 @@
 
   /** @ngInject */
   function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog, CheckInService, $firebaseArray) {
-    var vm = this,
-        guardians = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/guardians/' + $stateParams.id)),
-        students = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/students'));
+    var vm = this;
 
-    vm.guardians = guardians;
-    vm.students = students;
-
-
-    students.$loaded(
-      function() {
-        vm.student = students.$getRecord($stateParams.id);
-      }, function(error) {
-        console.error("Error:", error);
-      });
-
-    CheckInService.Student.getById($stateParams.id).then(function(data, status) {
-      $log.info(arguments);
-    });
-
-    CheckInService.Student.guardians($stateParams.id).then(function(data, status) {
-      $log.info(arguments);
-    });
+    updateView();
 
     vm.addGuardian = function(ev) {
       $mdDialog.show({
@@ -43,20 +24,29 @@
         targetEvent: ev,
         clickOutsideToClose:true
       })
-      .then(function(viewModal) {
-          guardians.$add({
-            image: viewModal.file[0].base64,
-            first_name: viewModal.firstName,
-            last_name: viewModal.lastName,
-            relationship: viewModal.relationship || '',
-            home_phone: viewModal.homePhone || '',
-            mobile_phone: viewModal.mobilePhone || '',
-            email: viewModal.email || '',
-            address: viewModal.address || '',
-            pick_up_times: viewModal.pickup
+      .then(function(viewModel) {
+          CheckInService.Student.addGuardian(vm.student.id, {
+            image: viewModel.file[0].base64,
+            first_name: viewModel.firstName,
+            last_name: viewModel.lastName,
+            relationship: viewModel.relationship || '',
+            home_phone: viewModel.homePhone || '',
+            mobile_phone: viewModel.mobilePhone || '',
+            email: viewModel.email || '',
+            address: viewModel.address || '',
+            pick_up_times: (function(days) {
+              var _days = [];
+              for(var day in days) {
+                if(days[day]) {
+                  _days.push(day);
+                }
+              }
+
+              return _days.join(' ');
+            })(viewModel.pickup)
           }).then(function() {
             //you did it
-            vm.guardians = guardians;
+            updateView();
           });
       }, function() {
 
@@ -84,6 +74,18 @@
           .ok('Neat!')
           .targetEvent(event)
       );
+    };
+
+
+    function updateView() {
+      CheckInService.Student.getById($stateParams.id).then(function(data, status) {
+        vm.student = data;
+      });
+
+      CheckInService.Student.guardians($stateParams.id).then(function(data, status) {
+        vm.guardians = data;
+      });
+
     };
 
   }

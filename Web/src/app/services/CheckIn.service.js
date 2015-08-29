@@ -104,6 +104,24 @@
 
             return _deferred.promise;
           },
+          addGuardian: function(student_id, newGuardian) {
+            var _deferred = $q.defer();
+
+            $http({
+              url: [_base, '/student/', student_id, '/guardian'].join(''),
+              method: 'POST',
+              responseType: 'json',
+              data: newGuardian
+            })
+            .success(function(data, status) {
+              _deferred.resolve(data, status);
+            })
+            .error(function(data, status) {
+              _deferred.reject(data, status);
+            });
+
+            return _deferred.promise;
+          },
           guardians: function(student_id) {
             var _deferred = $q.defer();
 

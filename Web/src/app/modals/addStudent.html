@@ -11,9 +11,8 @@
     </md-toolbar>
 
     <md-dialog-content style="max-width:800px; max-height:810px;">
-      <md-button class="md-primary md-hue-2" ngf-select ng-model="file" name="file" ngf-pattern="'image/*"
-                 accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Upload Photo
-      </md-button>
+
+      <input type="file" ng-model="AddStudentController.file" multiple base-sixty-four-input>
 
       <div layout="row">
         <md-input-container>
@@ -49,7 +48,7 @@
       <md-button ng-click="AddStudentController.cancel()">
         Cancel
       </md-button>
-      <md-button class="md-primary" ng-click="AddStudentController.confirm()" style="margin-right:20px;">
+      <md-button class="md-primary" ng-click="AddStudentController.confirm()">
         Confirm
       </md-button>
     </div>
