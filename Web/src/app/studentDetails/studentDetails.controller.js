@@ -10,44 +10,28 @@
     .controller('StudentDetailsController', StudentDetailsController);
 
   /** @ngInject */
-  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog) {
-    var vm = this;
+  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog, $firebaseArray) {
+    var vm = this,
+        guardians = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/guardians/' + $stateParams.id)),
+        students = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/students'));
 
-    $log.info($stateParams.id);
-
-    vm.toggleLeft = buildToggler('left');
-    vm.toggleRight = buildToggler('right');
-
-    vm.close = function () {
-      $mdSidenav('left').close()
-        .then(function () {
-          $log.debug("close LEFT is done");
-        });
-    };
-    /**
-     * Build handler to open/close a SideNav; when animation finishes
-     * report completion in console
-     */
-    function buildToggler(navID) {
-      var debounceFn =  $mdUtil.debounce(function(){
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      },200);
-      return debounceFn;
-    }
+    vm.guardians = guardians;
+    vm.students = students;
 
 
-    $http({
-      url: 'https://randomuser.me/api/',
-      dataType: 'json'
-    })
-    .success(function(data, status) {
-        vm.student = data.results[0].user;
-    });
-
+    students.$loaded(
+      function() {
+        vm.student = students.$getRecord($stateParams.id);
+      }, function(error) {
+        console.error("Error:", error);
+      });
+    //$http({
+    //  url: 'https://randomuser.me/api/',
+    //  dataType: 'json'
+    //})
+    //.success(function(data, status) {
+    //    vm.student = data.results[0].user;
+    //});
 
     vm.addGuardian = function(ev) {
       $mdDialog.show({
@@ -58,26 +42,60 @@
         targetEvent: ev,
         clickOutsideToClose:true
       })
-      .then(function(answer) {
-
+      .then(function(viewModal) {
+          guardians.$add({
+            image: viewModal.file || 'https://unsplash.it/200',
+            first_name: viewModal.firstName,
+            last_name: viewModal.lastName,
+            relationship: viewModal.relationship,
+            contact: viewModal.contactNumber
+          }).then(function() {
+            //you did it
+            vm.guardians = guardians;
+          });
       }, function() {
 
       });
     };
+
+    vm.viewGuardianDetails = function(guardian, evt) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .title('Navigating')
+          .content('Inspect ' + guardian)
+          .ariaLabel('Person inspect demo')
+          .ok('Neat!')
+          .targetEvent(event)
+      );
+    };
+
+
+    vm.updateGuardianStatus = function(guardian, evt) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .title('Navigating')
+          .content('Inspect ' + guardian)
+          .ariaLabel('Person inspect demo')
+          .ok('Neat!')
+          .targetEvent(event)
+      );
+    };
+
   }
 
 
   function AddGuardianController($scope, $mdDialog, Upload) {
     var vm = this;
 
-    vm.hide = function() {
-      $mdDialog.hide();
+    vm.upload = function(file) {
+      $log.info(file);
     };
+
     vm.cancel = function() {
       $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
+    vm.confirm = function() {
+      $mdDialog.hide(vm);
     };
   }
 

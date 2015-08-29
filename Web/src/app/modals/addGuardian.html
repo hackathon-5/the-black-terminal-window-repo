@@ -11,9 +11,9 @@
     </md-toolbar>
 
     <md-dialog-content style="max-width:800px; max-height:810px;">
-      <md-button class="md-primary md-hue-2" ngf-select ng-model="file" name="file" ngf-pattern="'image/*"
-                 accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Upload Photo
-      </md-button>
+      <div class="md-primary md-hue-2" ngf-select="AddGuardianController.upload($file)" ng-model="AddGuardianController.file" name="file" ngf-pattern="'image/*"
+                 accept="image/*">Upload Photo
+      </div>
 
       <div layout="row">
         <md-input-container>
@@ -40,10 +40,10 @@
     </md-dialog-content>
 
     <div class="md-actions" layout="row">
-      <md-button ng-click="AddGuardianController.answer('not useful')">
+      <md-button ng-click="AddGuardianController.cancel()">
         Cancel
       </md-button>
-      <md-button class="md-primary" ng-click="AddGuardianController.answer('useful')" style="margin-right:20px;">
+      <md-button class="md-primary" ng-click="AddGuardianController.confirm()" style="margin-right:20px;">
         Confirm
       </md-button>
     </div>
