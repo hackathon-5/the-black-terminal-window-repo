@@ -1,0 +1,32 @@
+<div layout="row">
+
+  <div flex offset="33">
+    <md-whiteframe class="md-whiteframe-z1" layout layout-align="center" style="margin-top: 35%; padding: 0 30px 30px 30px;">
+
+      <form style="width: 70%;" ng-submit="LoginController.login()">
+        <h2>
+          Login
+        </h2>
+        <md-input-container>
+          <label>Email</label>
+          <input ng-model="LoginController.email">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Password</label>
+          <input ng-model="LoginController.password">
+        </md-input-container>
+
+        <section layout="row" layout-align="end center" layout-wrap>
+          <md-button type="reset">Reset</md-button>
+          <md-button type="submit" class="md-primary">Login</md-button>
+        </section>
+      </form>
+    </md-whiteframe>
+  </div>
+
+  <div flex>
+
+  </div>
+
+</div>
