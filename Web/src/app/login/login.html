@@ -1,9 +1,9 @@
-<div layout="row">
+<div layout="row" class="login-page">
 
   <div flex offset="33">
-    <md-whiteframe class="md-whiteframe-z1" layout layout-align="center" style="margin-top: 35%; padding: 0 30px 30px 30px;">
+    <md-whiteframe class="md-whiteframe-z1" layout layout-align="center">
 
-      <form style="width: 70%;" ng-submit="LoginController.login()">
+      <form style="width: 75%;" ng-submit="LoginController.login()">
         <h2>
           Login
         </h2>
@@ -17,9 +17,8 @@
           <input ng-model="LoginController.password" type="password">
         </md-input-container>
 
-        <section layout="row" layout-align="end center" layout-wrap>
-          <md-button type="reset">Reset</md-button>
-          <md-button type="submit" class="md-primary">Login</md-button>
+        <section layout="row" layout-align="center center" layout-wrap>
+          <md-button type="submit" class="md-raised md-primary">Login</md-button>
         </section>
       </form>
     </md-whiteframe>

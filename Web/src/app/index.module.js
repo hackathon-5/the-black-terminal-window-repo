@@ -11,7 +11,8 @@
       'ui.router',
       'ngMaterial',
       'ngFileUpload',
-      'CheckInService'
+      'CheckInService',
+      'firebase'
     ]);
 
 })();

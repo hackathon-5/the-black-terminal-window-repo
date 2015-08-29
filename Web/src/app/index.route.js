@@ -37,7 +37,7 @@
         controllerAs: 'StudentDetailsController'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/student');
   }
 
 })();

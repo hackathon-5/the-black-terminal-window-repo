@@ -3,52 +3,28 @@
   <material-toolbar creationDate="MainController.creationDate" />
 </div>
 
-<md-content>
+<md-content style="margin-top: 25px; overflow: hidden;">
   <md-grid-list
     md-cols-sm="1"
     md-cols-md="2"
-    md-cols-gt-md="6"
+    md-cols-gt-md="4"
     md-row-height-gt-md="1:1"
     md-row-height="2:2"
     md-gutter="12px"
     md-gutter-gt-sm="8px" >
-    <md-grid-tile
-      ng-click="StudentController.openStudentDetails(1)"
-      class="gray"
-      md-rowspan="3"
-      md-colspan="2"
-      md-colspan-sm="1">
+
+    <md-grid-tile ng-click="StudentController.openStudentDetails(student.$id)" class="gray" ng-repeat="student in StudentController.list">
+      <img src="{{student.image}}" />
       <md-grid-tile-footer>
-        <h3>#1: (3r x 2c)</h3>
+        <h3>{{student.first_name + " " + student.last_name}}</h3>
       </md-grid-tile-footer>
     </md-grid-tile>
-    <md-grid-tile ng-click="StudentController.openStudentDetails(2)" class="green">
-      <md-grid-tile-footer>
-        <h3>#2: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile ng-click="StudentController.openStudentDetails(3)" class="yellow">
-      <md-grid-tile-footer>
-        <h3>#3: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile ng-click="StudentController.openStudentDetails(4)" class="blue"
-                  md-rowspan="2">
-      <md-grid-tile-footer>
-        <h3>#4: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile ng-click="StudentController.openStudentDetails(5)" class="red"
-                  md-rowspan="2" md-colspan="2" md-colspan-sm="1">
-      <md-grid-tile-footer>
-        <h3>#5: (2r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-    <md-grid-tile ng-click="StudentController.openStudentDetails(6)" class="green"
-                  md-rowspan="2" >
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
+
   </md-grid-list>
 </md-content>
+
+
+<md-button ng-click="StudentController.addStudent($event)" class="md-fab" aria-label="Add" style="position: fixed; right: 15px; bottom: 25px;">
+  <md-icon><i class="material-icons">add</i></md-icon>
+</md-button>
+
