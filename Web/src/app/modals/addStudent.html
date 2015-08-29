@@ -4,7 +4,7 @@
       <div class="md-toolbar-tools">
         <h2>Add Student</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="AddStudentController.answer('not applicable')">
+        <md-button class="md-icon-button" ng-click="AddStudentController.cancel()">
           <md-icon aria-label="Close dialog"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
@@ -26,17 +26,23 @@
           <input ng-model="AddStudentController.lastName" type="text">
         </md-input-container>
       </div>
-      <div>
-        <md-input-container>
-          <label>Grade</label>
-          <input ng-model="AddStudentController.grade" type="number">
+      <div layout="row">
+
+        <md-input-container flex>
+          <label>Date of Birth</label>
+          <input ng-model="AddStudentController.dob" type="date">
         </md-input-container>
 
-        <md-input-container>
-          <label>Address</label>
-          <input ng-model="AddStudentController.address" type="text">
+        <md-input-container flex>
+          <label>Current Grade</label>
+          <input ng-model="AddStudentController.grade" type="number" min="0" max="12">
         </md-input-container>
       </div>
+
+      <md-input-container>
+        <label>Address</label>
+        <input ng-model="AddStudentController.address" type="text">
+      </md-input-container>
     </md-dialog-content>
 
     <div class="md-actions" layout="row">
