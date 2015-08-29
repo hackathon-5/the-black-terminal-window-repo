@@ -45,7 +45,7 @@ class Guardian(Base):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
-    image = db.Column(db.String)
+    image = db.Column(db.String, nullable=False)
     relationship = db.Column(db.String, nullable=False)
     home_phone = db.Column(db.String)
     mobile_phone = db.Column(db.String)
@@ -58,4 +58,6 @@ class Guardian(Base):
 
 class StudentEvents(Base):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
+    guardian_id = db.Column(db.Integer, db.ForeignKey('guardian.id'))
     event = db.Column(db.String, nullable=False)
+    time = db.Column(db.String)

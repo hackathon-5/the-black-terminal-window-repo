@@ -41,7 +41,7 @@ def generate_user():
         g.teacher_id = None
         return
     token_key = 'auth_token:{}'.format(request.headers.get('Authorization'))
-
+    print(token_key)
     token = AuthorizationTokens.query.filter_by(auth_token=token_key).first().auth_token
 
     if not token:
