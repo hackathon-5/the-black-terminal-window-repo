@@ -54,26 +54,27 @@
     };
 
     vm.viewGuardianDetails = function(guardian, evt) {
-      $mdDialog.show(
-        $mdDialog.alert()
-          .title('Navigating')
-          .content('Inspect ' + guardian)
-          .ariaLabel('Person inspect demo')
-          .ok('Neat!')
-          .targetEvent(event)
-      );
+
     };
 
 
     vm.updateGuardianStatus = function(guardian, evt) {
-      $mdDialog.show(
-        $mdDialog.alert()
-          .title('Navigating')
-          .content('Inspect ' + guardian)
-          .ariaLabel('Person inspect demo')
-          .ok('Neat!')
-          .targetEvent(event)
-      );
+      $mdDialog.show({
+        controller: EventController,
+        controllerAs: 'EventController',
+        templateUrl: './app/modals/addEvent.html',
+        parent: angular.element(document.body),
+        targetEvent: evt,
+        clickOutsideToClose:true
+      })
+      .then(function(viewModel) {
+        CheckInService.Student.event($stateParams.id, guardian.id, viewModel.closeReason).then(function() {
+
+        });
+      }, function() {
+
+      });
+
     };
 
 
@@ -86,12 +87,26 @@
         vm.guardians = data;
       });
 
+      CheckInService.Student.events($stateParams.id).then(function() {
+
+      });
     };
 
   }
 
 
   function AddGuardianController($scope, $mdDialog, Upload, $log) {
+    var vm = this;
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+    vm.confirm = function() {
+      $mdDialog.hide(vm);
+    };
+  }
+
+  function EventController($scope, $mdDialog, Upload, $log) {
     var vm = this;
 
     vm.cancel = function() {

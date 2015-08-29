@@ -1,0 +1,33 @@
+<md-dialog aria-label="Student Event">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Event</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="EventController.cancel()">
+          <md-icon aria-label="Close dialog"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="max-width:800px; max-height:810px;">
+      <p>Tell us a little about this event:</p>
+      <md-radio-group ng-model="EventController.eventReasons">
+        <md-radio-button value="picking_up" >Picking up</md-radio-button>
+        <md-radio-button value="leaving_early" >Leaving early</md-radio-button>
+        <md-radio-button value="sick">Sick or Dr. Appointment</md-radio-button>
+        <md-radio-button value="family_emergency">Family emergency</md-radio-button>
+        <md-radio-button value="other">Other</md-radio-button>
+      </md-radio-group>
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row">
+      <md-button ng-click="EventController.cancel()">
+        Cancel
+      </md-button>
+      <md-button class="md-primary" ng-click="EventController.confirm()">
+        Confirm
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

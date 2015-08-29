@@ -11,29 +11,6 @@
 
 
   <md-tabs md-dynamic-height md-border-bottom>
-    <md-tab label="Student Details">
-      <div layout="row">
-        <div flex></div>
-        <div flex-gt-md="75">
-          <md-content class="md-padding">
-            <div layout="row">
-              <div flex>
-                <img ng-src="data:image/png;base64,{{StudentDetailsController.student.image}}"  />
-              </div>
-              <div flex>
-                <label>First Name: </label>{{StudentDetailsController.student.first_name}}<br />
-                <label>Last Name: </label>{{StudentDetailsController.student.last_name}}<br />
-                <label>Grade: </label>{{StudentDetailsController.student.grade}}<br />
-                <label>Date of Birth: </label>{{StudentDetailsController.student.dob}}<br />
-                <label>Address: </label>{{StudentDetailsController.student.address}}<br />
-              </div>
-            </div>
-          </md-content>
-        </div>
-        <div flex></div>
-      </div>
-    </md-tab>
-
     <md-tab label="Guardians">
       <div layout="row">
         <div flex></div>
@@ -59,6 +36,29 @@
               </div>
               <md-divider></md-divider>
             </md-list>
+          </md-content>
+        </div>
+        <div flex></div>
+      </div>
+    </md-tab>
+
+    <md-tab label="Student Details">
+      <div layout="row">
+        <div flex></div>
+        <div flex-gt-md="75">
+          <md-content class="md-padding">
+            <div layout="row">
+              <div flex>
+                <img ng-src="data:image/png;base64,{{StudentDetailsController.student.image}}"  />
+              </div>
+              <div flex>
+                <label>First Name: </label>{{StudentDetailsController.student.first_name}}<br />
+                <label>Last Name: </label>{{StudentDetailsController.student.last_name}}<br />
+                <label>Grade: </label>{{StudentDetailsController.student.grade}}<br />
+                <label>Date of Birth: </label>{{StudentDetailsController.student.dob}}<br />
+                <label>Address: </label>{{StudentDetailsController.student.address}}<br />
+              </div>
+            </div>
           </md-content>
         </div>
         <div flex></div>

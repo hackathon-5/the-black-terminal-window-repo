@@ -13,7 +13,7 @@
 
       function($http, $q) {
         var service = {},
-            _base = 'http://52.3.105.93:9000';
+            _base = 'http://studentguardian.52-apps.com:9000';
 
         service.login = function(username, password) {
           var _deferred = $q.defer();
@@ -153,6 +153,45 @@
               .error(function(data, status) {
                 _deferred.reject(data, status);
               });
+
+            return _deferred.promise;
+          },
+          event: function(student_id, guardian_id, reason) {
+            var _deferred = $q.defer();
+
+            $http({
+              url: [_base, '/student/event'].join(''),
+              method: 'Post',
+              responseType: 'json',
+              data: {
+                'student_id': student_id,
+                'guardian_id': guardian_id,
+                'reason': reason
+              }
+            })
+            .success(function(data, status) {
+              _deferred.resolve(data, status);
+            })
+            .error(function(data, status) {
+              _deferred.reject(data, status);
+            });
+
+            return _deferred.promise;
+          },
+          events: function(student_id) {
+            var _deferred = $q.defer();
+
+            $http({
+              url: [_base, '/student/', student_id, '/events'].join(''),
+              method: 'GET',
+              responseType: 'json'
+            })
+            .success(function(data, status) {
+              _deferred.resolve(data, status);
+            })
+            .error(function(data, status) {
+              _deferred.reject(data, status);
+            });
 
             return _deferred.promise;
           }

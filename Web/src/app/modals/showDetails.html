@@ -1,0 +1,31 @@
+<md-dialog aria-label="Guardian Details">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Guardian Details</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="DetailsController.cancel()">
+          <md-icon aria-label="Close dialog"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="max-width:800px; max-height:810px;">
+      <label>Relationship: </label>{{DetailsController.guardian.relationship}}<br />
+      <label>Relationship: </label>{{DetailsController.guardian.relationship}}<br />
+      <label>Relationship: </label>{{DetailsController.guardian.relationship}}<br />
+      <label>Relationship: </label>{{DetailsController.guardian.relationship}}<br />
+      <label>Relationship: </label>{{DetailsController.guardian.relationship}}<br />
+
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row">
+      <md-button ng-click="EventController.cancel()">
+        Cancel
+      </md-button>
+      <md-button class="md-primary" ng-click="EventController.confirm()">
+        Confirm
+      </md-button>
+    </div>
+  </form>
+</md-dialog>
