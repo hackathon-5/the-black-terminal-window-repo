@@ -5,18 +5,19 @@ from project import db
 
 class Teacher(db.Model):
     username = db.Column(db.String, nullable=False, unique=True)
-
+    _password = db.Column(db.String, nullable=False)
     @hybrid_property
     def password(self):
-        return self.password
+        return self._password
 
     @password.setter
     def password(self, value):
-        self.password = bcrypt.hashpw(value, bcrypt.gensalt())
+        self._password = bcrypt.hashpw(value, bcrypt.gensalt())
 
+    def check_password(self, password):
+        return bcrypt.hashpw(password, self.password) == self.password
 
-class Tokens(db.Model):
-    teacher_id = db.Column(db.Integer, foregin_keys='teacher.id')
-    auth_token = db.Column(db.String, nullable=False)
+class AuthorizationTokens(db.Model):
+    key = db.Column(db.String, nullable=False)
 
 
