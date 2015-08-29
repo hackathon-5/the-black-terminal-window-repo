@@ -12,5 +12,8 @@
 
 ---
 ### Web Magic
-- Not sure really... 
+All the materials being designed.
+Routes being routed.
+Controllers under controlled.
+
 
