@@ -13,8 +13,8 @@
     md-gutter="12px"
     md-gutter-gt-sm="8px" >
 
-    <md-grid-tile ng-click="StudentController.openStudentDetails(student.$id)" class="gray" ng-repeat="student in StudentController.list">
-      <img src="{{student.image}}" />
+    <md-grid-tile ng-click="StudentController.openStudentDetails(student.id)" class="gray" ng-repeat="student in StudentController.students">
+      <img src="data:image/png;base64,{{student.image}}" />
       <md-grid-tile-footer>
         <h3>{{student.first_name + " " + student.last_name}}</h3>
       </md-grid-tile-footer>
