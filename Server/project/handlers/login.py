@@ -10,9 +10,14 @@ login_bp = Blueprint('login', __name__, url_prefix='/login')
 def login():
     if not request.json.get('username'):
         abort(403)
-    teacher = Teacher.query.filter_by(username=request.json.get('username')).first()
 
     if not request.json.get('password'):
+        abort(403)
+    username = request.json.get('username')
+
+    teacher = Teacher.query.filter_by(username=username).first()
+
+    if not teacher:
         abort(403)
 
     if not teacher.check_password(request.json.get('password')):
@@ -30,7 +35,7 @@ def login():
                    auth_secrete=token.auth_secret)
 
 
-@login_bp.record('/new', methods=['POST'])
+@login_bp.route('/new', methods=['POST'])
 def new_teacher():
     if not request.json.get('username') or not request.json.get('password'):
         abort(400)

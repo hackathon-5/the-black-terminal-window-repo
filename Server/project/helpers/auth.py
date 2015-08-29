@@ -2,10 +2,13 @@ import os
 import hashlib
 import datetime as dt
 from .. import db
-from flask import g, request, abort,json
+from flask import g, request, json, abort
 from ..models import AuthorizationTokens
+
+
 def generate_token():
     return hashlib.sha256(os.urandom(64).hexdigest())
+
 
 class AccessToken(object):
     def __init__(self, input_info=None, **kwargs):
@@ -19,6 +22,7 @@ class AccessToken(object):
         if not hasattr(self, 'auth_token') or not hasattr(self, 'auth_secret'):
             self.auth_token = generate_token()
             self.auth_secret = generate_token()
+
     def save(self):
         key = 'auth_token:{}'.format(self.auth_token)
         new_token = AuthorizationTokens(key=key)
@@ -31,12 +35,10 @@ class AccessToken(object):
         return AccessToken(data)
 
 
-
-
 def generate_user():
     if not request.headers.get('Authorization'):
         g.teacher_id = None
-        abort(403)
+        return
     token_key = 'auth_token:{}'.format(request.headers.get('Authorization'))
 
     token = AuthorizationTokens.query.filter_by(key=token_key).first()
