@@ -1,0 +1,1 @@
+SQLALCHMEY_DATABASE_URI = 'postgresql://postgres:binarystargate@52.3.105.93'
