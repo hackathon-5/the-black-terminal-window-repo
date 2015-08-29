@@ -6,7 +6,11 @@
 
 [Python 3.x](https://www.python.org/download/releases/3.0/) - Backend server is running on Python 3.4
 
-[BCrypt](https://flask-bcrypt.readthedocs.org/en/latest/) - All passwords and access tokens are stored and verified using 14 round bcrypt 
+[Flask](http://flask.pocoo.org/) - The main routing / api engine
+
+[sqlalchemy](http://www.sqlalchemy.org/) - Sits between the Python and Database (so they don't start fighting)
+
+[BCrypt](https://flask-bcrypt.readthedocs.org/en/latest/) - All passwords and access tokens are stored and verified using 14 round bcrypt (security consultent indicated we should use 140 rounds, but he was ignored)
 
 [Docker](https://www.docker.com/) & [Postgres](https://hub.docker.com/_/postgres/) - Are used to deploy persistant application storage
 
