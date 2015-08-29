@@ -31,7 +31,7 @@ class Teacher(Base):
 
 
 class AuthorizationTokens(Base):
-    key = db.Column(db.String, nullable=False)
+    auth_token = db.Column('auth_token',db.String, nullable=False)
 
 class Student(Base):
     grade = db.Column(db.String, nullable=False)
@@ -41,7 +41,7 @@ class Student(Base):
     dob = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
 
-class Garudian(Base):
+class Guardian(Base):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)

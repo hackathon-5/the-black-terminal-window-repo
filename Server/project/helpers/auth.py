@@ -26,7 +26,7 @@ class AccessToken(object):
 
     def save(self):
         key = 'auth_token:{}'.format(self.auth_token)
-        new_token = AuthorizationTokens(key=key)
+        new_token = AuthorizationTokens(auth_token=key)
         db.session.add(new_token)
         db.session.commit()
 
@@ -42,7 +42,7 @@ def generate_user():
         return
     token_key = 'auth_token:{}'.format(request.headers.get('Authorization'))
 
-    token = AuthorizationTokens.query.filter_by(key=token_key).first()
+    token = AuthorizationTokens.query.filter_by(auth_token=token_key).first().auth_token
 
     if not token:
         g.teacher_id = None
@@ -65,7 +65,7 @@ def require_auth():
 def renew_token():
     token_key = 'auth_token:{}'.format(request.headers.get('Authorization'))
 
-    token = AuthorizationTokens.query.filter_by(key=token_key).first()
+    token = AuthorizationTokens.query.filter_by(auth_token=token_key).first().auth_token
 
     parsed_token = AccessToken.loads_from_json(token)
 

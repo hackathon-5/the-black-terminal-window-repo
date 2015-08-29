@@ -24,7 +24,8 @@ app.after_request(add_cors_headers)
 
 
 from .handlers.login import login_bp
+from .handlers.student import student_bp
 app.register_blueprint(login_bp)
+app.register_blueprint(student_bp)
 
-
-db.create_all()
+#db.create_all()
