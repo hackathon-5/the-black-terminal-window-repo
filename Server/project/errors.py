@@ -22,3 +22,16 @@ def handle_error(error):
 
     response = jsonify(rv)
     response.status_code = code
+
+
+    cors_headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Access-Control-Allow-Headers': 'Authorization, '
+                                        'Origin, Content-Type, Accept'
+    }
+
+    for k, v in cors_headers.items():
+        response.headers[k] = v
+
+    return response

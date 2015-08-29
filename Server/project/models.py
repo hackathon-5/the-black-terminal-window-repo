@@ -24,10 +24,10 @@ class Teacher(Base):
 
     @password.setter
     def password(self, value):
-        self._password = bcrypt.hashpw(value, bcrypt.gensalt())
+        self._password = bcrypt.hashpw(value.encode('utf-8'), bcrypt.gensalt())
 
     def check_password(self, password):
-        return bcrypt.hashpw(password, self.password) == self.password
+        return bcrypt.hashpw(password.encode('utf-8'), self._password.encode('utf-8')) == self._password
 
 
 class AuthorizationTokens(Base):
