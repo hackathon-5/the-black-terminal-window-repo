@@ -1,5 +1,21 @@
 .hero-image {
-  background: url(https://unsplash.it/1200/500/?random) no-repeat center center;
+  background: url(../assets/images/d1524764.jpeg) no-repeat center center;
   background-size: cover;
   height: 500px;
+
+  > div {
+    z-index: 1;
+  }
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 500px;
+    background-color: rgba(11, 11, 11, 0.22);
+    z-index: 0;
+  }
 }

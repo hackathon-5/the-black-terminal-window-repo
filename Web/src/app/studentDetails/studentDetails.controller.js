@@ -10,7 +10,7 @@
     .controller('StudentDetailsController', StudentDetailsController);
 
   /** @ngInject */
-  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog, $firebaseArray) {
+  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog, CheckInService, $firebaseArray) {
     var vm = this,
         guardians = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/guardians/' + $stateParams.id)),
         students = $firebaseArray(new Firebase('https://checkin-hackathon5.firebaseio.com/students'));
@@ -25,13 +25,14 @@
       }, function(error) {
         console.error("Error:", error);
       });
-    //$http({
-    //  url: 'https://randomuser.me/api/',
-    //  dataType: 'json'
-    //})
-    //.success(function(data, status) {
-    //    vm.student = data.results[0].user;
-    //});
+
+    CheckInService.Student.getById($stateParams.id).then(function(data, status) {
+      $log.info(arguments);
+    });
+
+    CheckInService.Student.guardians($stateParams.id).then(function(data, status) {
+      $log.info(arguments);
+    });
 
     vm.addGuardian = function(ev) {
       $mdDialog.show({
@@ -44,11 +45,15 @@
       })
       .then(function(viewModal) {
           guardians.$add({
-            image: viewModal.file || 'https://unsplash.it/200',
+            image: viewModal.file[0].base64,
             first_name: viewModal.firstName,
             last_name: viewModal.lastName,
-            relationship: viewModal.relationship,
-            contact: viewModal.contactNumber
+            relationship: viewModal.relationship || '',
+            home_phone: viewModal.homePhone || '',
+            mobile_phone: viewModal.mobilePhone || '',
+            email: viewModal.email || '',
+            address: viewModal.address || '',
+            pick_up_times: viewModal.pickup
           }).then(function() {
             //you did it
             vm.guardians = guardians;
@@ -84,12 +89,8 @@
   }
 
 
-  function AddGuardianController($scope, $mdDialog, Upload) {
+  function AddGuardianController($scope, $mdDialog, Upload, $log) {
     var vm = this;
-
-    vm.upload = function(file) {
-      $log.info(file);
-    };
 
     vm.cancel = function() {
       $mdDialog.cancel();

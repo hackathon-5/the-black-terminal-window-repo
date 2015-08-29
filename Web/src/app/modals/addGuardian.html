@@ -1,5 +1,5 @@
 <md-dialog aria-label="Add Guardian">
-  <form>
+  <form name="addGuardianForm">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>Add Guardian</h2>
@@ -10,41 +10,97 @@
       </div>
     </md-toolbar>
 
-    <md-dialog-content style="max-width:800px; max-height:810px;">
-      <div class="md-primary md-hue-2" ngf-select="AddGuardianController.upload($file)" ng-model="AddGuardianController.file" name="file" ngf-pattern="'image/*"
-                 accept="image/*">Upload Photo
-      </div>
+    <md-dialog-content ng-switch on="next" style="min-width: 375px; max-width:800px; max-height:810px;">
+      <div ng-switch-default>
+        <div layout="row">
+          <!--<img ngf-src="AddGuardianController.file || ''" style="height: 100px;" />-->
 
-      <div layout="row">
-        <md-input-container>
-          <label>First Name</label>
-          <input ng-model="AddGuardianController.firstName" type="text">
-        </md-input-container>
+          <!--<md-button class="md-primary md-hue-2" ngf-select="AddGuardianController.upload($file)" ng-model="AddGuardianController.file" name="file" ngf-pattern="'image/*"-->
+                     <!--accept="image/*" ngf-capture="mobile" style="max-height: 50xp;">Upload Photo-->
+          <!--</md-button>-->
+          <input  type="file" ng-model="AddGuardianController.file" multiple base-sixty-four-input>
 
-        <md-input-container>
-          <label>Last Name</label>
-          <input ng-model="AddGuardianController.lastName" type="text">
-        </md-input-container>
-      </div>
-      <div>
+        </div>
+
+        <div layout="row">
+
+          <md-input-container>
+            <label>First Name</label>
+            <input ng-model="AddGuardianController.firstName" type="text">
+          </md-input-container>
+
+          <md-input-container>
+            <label>Last Name</label>
+            <input ng-model="AddGuardianController.lastName" type="text">
+          </md-input-container>
+        </div>
+
         <md-input-container>
           <label>Relationship</label>
           <input ng-model="AddGuardianController.relationship" type="text">
         </md-input-container>
+      </div>
+      <div ng-switch-when="contact">
+        <md-input-container>
+          <label>Home Phone</label>
+          <input ng-model="AddGuardianController.homePhone" type="text">
+        </md-input-container>
 
         <md-input-container>
-          <label>Contact Number</label>
-          <input ng-model="AddGuardianController.contactNumber" type="text">
+          <label>Mobile Phone</label>
+          <input ng-model="AddGuardianController.mobilePhone" type="text">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Email</label>
+          <input ng-model="AddGuardianController.email" name="email" type="email">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Address</label>
+          <input ng-model="AddGuardianController.address" type="text">
+        </md-input-container>
+      </div>
+      <div ng-switch-when="pickup">
+        <h4 class="md-subhead">Allowed Pickup Times</h4>
+
+        <md-input-container>
+          <md-checkbox ng-model="AddGuardianController.pickup.monday" ng-init="AddGuardianController.pickup.monday = true" aria-label="Monday">
+            Monday
+          </md-checkbox>
+        </md-input-container>
+        <md-input-container>
+          <md-checkbox ng-model="AddGuardianController.pickup.tuesday" ng-init="AddGuardianController.pickup.tuesday = true" aria-label="Tuesday">
+            Tuesday
+          </md-checkbox>
+        </md-input-container>
+        <md-input-container>
+          <md-checkbox ng-model="AddGuardianController.pickup.wednesday" ng-init="AddGuardianController.pickup.wednesday = true" aria-label="Wednesday">
+            Wednesday
+          </md-checkbox>
+        </md-input-container>
+        <md-input-container>
+          <md-checkbox ng-model="AddGuardianController.pickup.thursday" ng-init="AddGuardianController.pickup.thursday = true" aria-label="Thursday">
+            Thursday
+          </md-checkbox>
+        </md-input-container>
+        <md-input-container>
+          <md-checkbox ng-model="AddGuardianController.pickup.friday" ng-init="AddGuardianController.pickup.friday = true" aria-label="Friday">
+            Friday
+          </md-checkbox>
         </md-input-container>
       </div>
     </md-dialog-content>
 
     <div class="md-actions" layout="row">
-      <md-button ng-click="AddGuardianController.cancel()">
+      <md-button ng-click="AddGuardianController.cancel()" ng-show="next === 'pickup'">
         Cancel
       </md-button>
-      <md-button class="md-primary" ng-click="AddGuardianController.confirm()" style="margin-right:20px;">
+      <md-button class="md-primary" ng-click="AddGuardianController.confirm()" ng-show="next === 'pickup'">
         Confirm
+      </md-button>
+      <md-button class="md-primary" ng-click="next = next !== 'contact' ? 'contact' : 'pickup'" ng-hide="next === 'pickup'" ng-disabled="AddGuardianController.file == null">
+        Next
       </md-button>
     </div>
   </form>

@@ -12,7 +12,9 @@
       'ngMaterial',
       'ngFileUpload',
       'CheckInService',
-      'firebase'
+      'firebase',
+      'ngMaterial.components',
+      'naif.base64'
     ]);
 
 })();
