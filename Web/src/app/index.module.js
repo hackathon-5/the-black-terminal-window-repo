@@ -9,7 +9,7 @@
       'ngSanitize',
       'ngResource',
       'ui.router',
-      'ui.bootstrap'
+      'ngMaterial'
     ]);
 
 })();
