@@ -2,3 +2,4 @@ flask
 flask-sqlalchemy
 arrow
 psycopg2
+attrdict
