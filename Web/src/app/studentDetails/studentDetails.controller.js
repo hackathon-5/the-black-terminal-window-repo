@@ -10,7 +10,7 @@
     .controller('StudentDetailsController', StudentDetailsController);
 
   /** @ngInject */
-  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http) {
+  function StudentDetailsController($state, $stateParams, $log, $mdSidenav, $mdUtil, $http, $mdDialog) {
     var vm = this;
 
     $log.info($stateParams.id);
@@ -47,6 +47,39 @@
     .success(function(data, status) {
         vm.student = data.results[0].user;
     });
+
+
+    vm.addGuardian = function(ev) {
+      $mdDialog.show({
+        controller: AddGuardianController,
+        controllerAs: 'AddGuardianController',
+        templateUrl: './app/modals/addGuardian.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(answer) {
+
+      }, function() {
+
+      });
+    };
   }
+
+
+  function AddGuardianController($scope, $mdDialog, Upload) {
+    var vm = this;
+
+    vm.hide = function() {
+      $mdDialog.hide();
+    };
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
 })();
 

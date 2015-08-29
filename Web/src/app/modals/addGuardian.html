@@ -1,0 +1,51 @@
+<md-dialog aria-label="Add Guardian">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Guardian</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="answer('not applicable')">
+          <md-icon aria-label="Close dialog"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="max-width:800px; max-height:810px;">
+      <md-button class="md-primary md-hue-2" ngf-select ng-model="file" name="file" ngf-pattern="'image/*"
+                 accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Upload Photo
+      </md-button>
+
+      <div layout="row">
+        <md-input-container>
+          <label>First Name</label>
+          <input ng-model="AddGuardianController.firstName" type="text">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Last Name</label>
+          <input ng-model="AddGuardianController.lastName" type="text">
+        </md-input-container>
+      </div>
+      <div>
+        <md-input-container>
+          <label>Relationship</label>
+          <input ng-model="AddGuardianController.relationship" type="text">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Contact Number</label>
+          <input ng-model="AddGuardianController.contactNumber" type="text">
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row">
+      <md-button ng-click="AddGuardianController.answer('not useful')">
+        Cancel
+      </md-button>
+      <md-button class="md-primary" ng-click="AddGuardianController.answer('useful')" style="margin-right:20px;">
+        Confirm
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

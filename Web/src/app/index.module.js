@@ -9,7 +9,9 @@
       'ngSanitize',
       'ngResource',
       'ui.router',
-      'ngMaterial'
+      'ngMaterial',
+      'ngFileUpload',
+      'CheckInService'
     ]);
 
 })();

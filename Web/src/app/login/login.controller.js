@@ -10,12 +10,13 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($state) {
+  function LoginController($state, CheckInService) {
     var vm = this;
 
     vm.login = function() {
-      console.log(vm.name, vm.password);
-      $state.go('home');
+      CheckInService.login(vm.username, vm.password).then(function() {
+        $state.go('home');
+      });
     };
   }
 })();
