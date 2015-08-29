@@ -3,15 +3,52 @@
   <material-toolbar creationDate="MainController.creationDate" />
 </div>
 
-
-<div layout="row">
-  <div flex>
-    Left Side
-  </div>
-  <div flex>
-    The Black Terminal Window Repo
-  </div>
-  <div flex hide-sm>
-    Right Side Hide small
-  </div>
-</div>
+<md-content>
+  <md-grid-list
+    md-cols-sm="1"
+    md-cols-md="2"
+    md-cols-gt-md="6"
+    md-row-height-gt-md="1:1"
+    md-row-height="2:2"
+    md-gutter="12px"
+    md-gutter-gt-sm="8px" >
+    <md-grid-tile
+      ng-click="StudentController.openStudentDetails(1)"
+      class="gray"
+      md-rowspan="3"
+      md-colspan="2"
+      md-colspan-sm="1">
+      <md-grid-tile-footer>
+        <h3>#1: (3r x 2c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile ng-click="StudentController.openStudentDetails(2)" class="green">
+      <md-grid-tile-footer>
+        <h3>#2: (1r x 1c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile ng-click="StudentController.openStudentDetails(3)" class="yellow">
+      <md-grid-tile-footer>
+        <h3>#3: (1r x 1c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile ng-click="StudentController.openStudentDetails(4)" class="blue"
+                  md-rowspan="2">
+      <md-grid-tile-footer>
+        <h3>#4: (2r x 1c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile ng-click="StudentController.openStudentDetails(5)" class="red"
+                  md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+      <md-grid-tile-footer>
+        <h3>#5: (2r x 2c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <md-grid-tile ng-click="StudentController.openStudentDetails(6)" class="green"
+                  md-rowspan="2" >
+      <md-grid-tile-footer>
+        <h3>#6: (2r x 1c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+</md-content>

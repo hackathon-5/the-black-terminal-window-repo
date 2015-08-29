@@ -28,6 +28,13 @@
         templateUrl: 'app/student/student.html',
         controller: 'StudentController',
         controllerAs: 'StudentController'
+      })
+
+      .state('studentDetails', {
+        url: '/student/:id',
+        templateUrl: 'app/studentDetails/studentDetails.html',
+        controller: 'StudentDetailsController',
+        controllerAs: 'StudentDetailsController'
       });
 
     $urlRouterProvider.otherwise('/');

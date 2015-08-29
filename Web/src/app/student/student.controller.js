@@ -10,8 +10,12 @@
     .controller('StudentController', StudentController);
 
   /** @ngInject */
-  function StudentController() {
+  function StudentController($state, $log) {
     var vm = this;
 
+    vm.openStudentDetails = function(student) {
+      $log.info(student);
+      $state.go('studentDetails', {id: student });
+    };
   }
 })();
