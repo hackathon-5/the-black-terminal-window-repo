@@ -34,11 +34,12 @@ class AuthorizationTokens(Base):
     key = db.Column(db.String, nullable=False)
 
 class Student(Base):
-    grade = db.Column(db.String)
+    grade = db.Column(db.String, nullable=False)
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     dob = db.Column(db.String, nullable=False)
+    address = db.Column(db.String, nullable=False)
 
 class Garudian(Base):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
@@ -46,6 +47,11 @@ class Garudian(Base):
     last_name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     relationship = db.Column(db.String, nullable=False)
+    home_phone = db.Column(db.String)
+    mobile_phone = db.Column(db.String)
+    work_phone = db.Column(db.String)
+    email = db.Column(db.String)
+    address = db.Column(db.String)
     pick_up_times = db.Column(db.String, default="Monday Tuesday Wednesday Thursday Friday")
 
     blacklist = db.Column(db.Boolean, default=False)
